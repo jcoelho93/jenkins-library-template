@@ -1,0 +1,39 @@
+apply plugin: 'groovy'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+    maven {
+        url "https://repo.jenkins-ci.org/releases/"
+    }
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.12'
+    compile 'org.apache.ivy:ivy:2.4.0'
+    compile 'com.lesfurets:jenkins-pipeline-unit:1.1'
+    // this should match our version of Jenkins
+    compile 'org.jenkins-ci.main:jenkins-core:2.235.5'
+    compile 'org.kohsuke.stapler:stapler:1.255'
+    annotationProcessor 'org.kohsuke.stapler:stapler:1.255'
+    compile 'org.jenkins-ci.plugins.workflow:workflow-step-api:2.19@jar'
+    compile 'org.jenkins-ci.plugins:pipeline-utility-steps:2.2.0@jar'
+    testCompile 'junit:junit:4.12'
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src', 'vars']
+        }
+        resources {
+            srcDirs = ['resources']
+        }
+    }
+    test {
+        groovy {
+            srcDirs = ['test']
+        }
+    }
+}
